@@ -1,0 +1,14 @@
+D:\github\Play-YM\DlgRender.cpp;D:\github\Play-YM\EasyPlayer\x64\Release\DlgRender.obj
+D:\github\Play-YM\DlgVideo.cpp;D:\github\Play-YM\EasyPlayer\x64\Release\DlgVideo.obj
+D:\github\Play-YM\hiknvr\buff.cpp;D:\github\Play-YM\EasyPlayer\x64\Release\buff.obj
+D:\github\Play-YM\hiknvr\psdemuxer.cpp;D:\github\Play-YM\EasyPlayer\x64\Release\psdemuxer.obj
+D:\github\Play-YM\hiknvr\sps_pps.cpp;D:\github\Play-YM\EasyPlayer\x64\Release\sps_pps.obj
+D:\github\Play-YM\EasyPlayer.cpp;D:\github\Play-YM\EasyPlayer\x64\Release\EasyPlayer.obj
+D:\github\Play-YM\EasyPlayerDlg.cpp;D:\github\Play-YM\EasyPlayer\x64\Release\EasyPlayerDlg.obj
+D:\github\Play-YM\stdafx.cpp;D:\github\Play-YM\EasyPlayer\x64\Release\stdafx.obj
+D:\github\Play-YM\sys_common.cpp;D:\github\Play-YM\EasyPlayer\x64\Release\sys_common.obj
+D:\github\Play-YM\tinyxml\tinystr.cpp;D:\github\Play-YM\EasyPlayer\x64\Release\tinystr.obj
+D:\github\Play-YM\tinyxml\tinyxml.cpp;D:\github\Play-YM\EasyPlayer\x64\Release\tinyxml.obj
+D:\github\Play-YM\tinyxml\tinyxmlerror.cpp;D:\github\Play-YM\EasyPlayer\x64\Release\tinyxmlerror.obj
+D:\github\Play-YM\tinyxml\tinyxmlparser.cpp;D:\github\Play-YM\EasyPlayer\x64\Release\tinyxmlparser.obj
+D:\github\Play-YM\xmlConfig.cpp;D:\github\Play-YM\EasyPlayer\x64\Release\xmlConfig.obj
