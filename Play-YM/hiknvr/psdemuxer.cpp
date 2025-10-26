@@ -108,7 +108,7 @@ int		PSDemux_GotoFileHead(PSDEMUX_HANDLE handle)
 	return 0;
 }
 
-//Ã¯◊™÷¡÷∏∂®Œª÷√
+//Ë∑≥ËΩ¨Ëá≥ÊåáÂÆö‰ΩçÁΩÆ
 int		PSDemux_GotoFileOffset(PSDEMUX_HANDLE handle, unsigned int offset)
 {
 	PS_FILE_OBJ_T *pFileObj = (PS_FILE_OBJ_T *)handle;
@@ -200,7 +200,7 @@ int		PSDemux_GetNextFrame(PSDEMUX_HANDLE handle, int *mediatype, int *framesize,
 		{
 			if (nReadBytes < 1)				break;
 
-			//_TRACE(TRACE_LOG_DEBUG, "∂¡»°◊÷Ω⁄: %d / %d\n", nReadBytes, PS_ReadBytes);
+			//_TRACE(TRACE_LOG_DEBUG, "ËØªÂèñÂ≠óËäÇ: %d / %d\n", nReadBytes, PS_ReadBytes);
 			if (feof(pFileObj->fPs))	getFrameResult	=	-1000;
 			else						getFrameResult	=	-10;
 			//break;
@@ -312,8 +312,8 @@ int		PSDemux_GetNextFrame(PSDEMUX_HANDLE handle, int *mediatype, int *framesize,
 #endif
 					}
 
-					i += (pes_length+4+2);	//4◊÷Ω⁄header, 2◊÷Ω⁄pes length
-					i-= 1;	//¥À¥¶-1, “ÚŒ™for—≠ª∑∫Û√Êª·+1
+					i += (pes_length+4+2);	//4Â≠óËäÇheader, 2Â≠óËäÇpes length
+					i-= 1;	//Ê≠§Â§Ñ-1, Âõ†‰∏∫forÂæ™ÁéØÂêéÈù¢‰ºö+1
 				}
 				else if (pes_length+i > nReadBytes)
 				{
@@ -332,7 +332,7 @@ int		PSDemux_GetNextFrame(PSDEMUX_HANDLE handle, int *mediatype, int *framesize,
 					//if ( (unsigned char)pFileObj->demuxBuf.pbuf[i+4] < 0xFF)
 					if ( pes_length < 1024)
 					{
-						////_TRACE("“ª÷°Ω· ¯.\n");
+						////_TRACE("‰∏ÄÂ∏ßÁªìÊùü.\n");
 						if (NULL != framesize)	*framesize = pFileObj->frame.bufpos;
 						if (NULL != framedata)	*framedata = pFileObj->frame.pbuf;
 
@@ -405,8 +405,8 @@ int		PSDemux_GetNextFrame(PSDEMUX_HANDLE handle, int *mediatype, int *framesize,
 						}
 #endif
 					}
-					i += (pes_length+4+2);	//4◊÷Ω⁄header, 2◊÷Ω⁄pes length
-					i-= 1;	//¥À¥¶-1, “ÚŒ™for—≠ª∑∫Û√Êª·+1
+					i += (pes_length+4+2);	//4Â≠óËäÇheader, 2Â≠óËäÇpes length
+					i-= 1;	//Ê≠§Â§Ñ-1, Âõ†‰∏∫forÂæ™ÁéØÂêéÈù¢‰ºö+1
 				}
 				else if (pes_length+i > nReadBytes)
 				{
@@ -425,7 +425,7 @@ int		PSDemux_GetNextFrame(PSDEMUX_HANDLE handle, int *mediatype, int *framesize,
 					//if ( (unsigned char)pFileObj->demuxBuf.pbuf[i+4] < 0xFF)
 					if ( pes_length < 1024)
 					{
-						////_TRACE("“ª÷°Ω· ¯.\n");
+						////_TRACE("‰∏ÄÂ∏ßÁªìÊùü.\n");
 						if (NULL != framesize)	*framesize = pFileObj->frame.bufpos;
 						if (NULL != framedata)	*framedata = pFileObj->frame.pbuf;
 
@@ -565,7 +565,7 @@ int		PSDemux_demux(PSDEMUX_HANDLE handle, char *pbuf, int bufsize, int *mediatyp
 				//if ( (unsigned char)pFileObj->demuxBuf.pbuf[i+4] < 0xFF && pFileObj->frame.bufpos>128)
 				if ( pes_length < 1024  && pFileObj->frame.bufpos>128)
 				{
-					////_TRACE("“ª÷°Ω· ¯.\n");
+					////_TRACE("‰∏ÄÂ∏ßÁªìÊùü.\n");
 					int remain_bytes = 0;
 
 					if (NULL != mediatype)	*mediatype = MEDIA_TYPE_VIDEO;
@@ -580,7 +580,7 @@ int		PSDemux_demux(PSDEMUX_HANDLE handle, char *pbuf, int bufsize, int *mediatyp
 					{
 						//_TRACE(TRACE_LOG_DEBUG, "%02X ", (unsigned char)pFileObj->frame.pbuf[ii]);
 					}
-					//_TRACE(TRACE_LOG_DEBUG, "\t\t∫Û25◊÷Ω⁄: ");
+					//_TRACE(TRACE_LOG_DEBUG, "\t\tÂêé25Â≠óËäÇ: ");
 					for (ii=24; ii>=0; ii--)
 					{
 						//_TRACE(TRACE_LOG_DEBUG, "%02X ", (unsigned char)pFileObj->frame.pbuf[pFileObj->frame.bufpos-ii]);
@@ -596,12 +596,12 @@ int		PSDemux_demux(PSDEMUX_HANDLE handle, char *pbuf, int bufsize, int *mediatyp
 					memset(pFileObj->demuxBuf.pbuf+pFileObj->demuxBuf.bufpos, 0x00, pFileObj->demuxBuf.bufsize-pFileObj->demuxBuf.bufpos);
 					
 
-					//_TRACE(TRACE_LOG_DEBUG, "¥¶¿Ì∫Û ˝æ›[%d]: ", pFileObj->demuxBuf.bufpos);
+					//_TRACE(TRACE_LOG_DEBUG, "Â§ÑÁêÜÂêéÊï∞ÊçÆ[%d]: ", pFileObj->demuxBuf.bufpos);
 					for (ii=0; ii<25; ii++)
 					{
 						//_TRACE(TRACE_LOG_DEBUG, "%02X ", (unsigned char)pFileObj->demuxBuf.pbuf[ii]);
 					}
-					//_TRACE(TRACE_LOG_DEBUG, "\t\t∫Û25◊÷Ω⁄: ");
+					//_TRACE(TRACE_LOG_DEBUG, "\t\tÂêé25Â≠óËäÇ: ");
 					for (ii=24; ii>=0; ii--)
 					{
 						//_TRACE(TRACE_LOG_DEBUG, "%02X ", (unsigned char)pFileObj->demuxBuf.pbuf[pFileObj->demuxBuf.bufpos-ii]);
@@ -611,8 +611,8 @@ int		PSDemux_demux(PSDEMUX_HANDLE handle, char *pbuf, int bufsize, int *mediatyp
 
 				if (pFileObj->demuxBuf.bufpos < pes_length)	break;
 
-				i += (pes_length+4+2);	//4◊÷Ω⁄header, 2◊÷Ω⁄pes length
-				i -= 1;	//¥À¥¶-1, “ÚŒ™for—≠ª∑∫Û√Êª·+1
+				i += (pes_length+4+2);	//4Â≠óËäÇheader, 2Â≠óËäÇpes length
+				i -= 1;	//Ê≠§Â§Ñ-1, Âõ†‰∏∫forÂæ™ÁéØÂêéÈù¢‰ºö+1
 			}
 			else if (pes_length+i > (pFileObj->demuxBuf.bufpos-i))
 			{
@@ -640,7 +640,7 @@ int		PSDemux_demux(PSDEMUX_HANDLE handle, char *pbuf, int bufsize, int *mediatyp
 
 				if ( (unsigned char)pFileObj->demuxBuf.pbuf[i+4] < 0xFF)
 				{
-					////_TRACE("“ª÷°Ω· ¯.\n");
+					////_TRACE("‰∏ÄÂ∏ßÁªìÊùü.\n");
 
 					if (NULL != mediatype)	*mediatype = MEDIA_TYPE_VIDEO;
 					if (NULL != framesize)	*framesize = pFileObj->frame.bufpos;
@@ -747,7 +747,7 @@ int		PSDemux_demux2(PSDEMUX_HANDLE handle, char *pbuf, int bufsize, int *mediaty
 				//if ( (unsigned char)pFileObj->demuxBuf.pbuf[i+4] < 0xFF && pFileObj->frame.bufpos>128)
 				 if (pes_length < 1024 && pFileObj->frame.bufpos>128 )
 				{
-					////_TRACE("“ª÷°Ω· ¯.\n");
+					////_TRACE("‰∏ÄÂ∏ßÁªìÊùü.\n");
 					int remain_bytes = 0;
 
 					if (NULL != mediatype)	*mediatype = MEDIA_TYPE_VIDEO;
@@ -765,12 +765,12 @@ int		PSDemux_demux2(PSDEMUX_HANDLE handle, char *pbuf, int bufsize, int *mediaty
 					memset(pFileObj->demuxBuf.pbuf+pFileObj->demuxBuf.bufpos, 0x00, pFileObj->demuxBuf.bufsize-pFileObj->demuxBuf.bufpos);
 					
 #if 0
-					//_TRACE("¥¶¿Ì∫Û ˝æ›[%d]: ", pFileObj->demuxBuf.bufpos);
+					//_TRACE("Â§ÑÁêÜÂêéÊï∞ÊçÆ[%d]: ", pFileObj->demuxBuf.bufpos);
 					for (ii=0; ii<25; ii++)
 					{
 						//_TRACE("%02X ", (unsigned char)pFileObj->demuxBuf.pbuf[ii]);
 					}
-					//_TRACE("\t\t∫Û25◊÷Ω⁄: ");
+					//_TRACE("\t\tÂêé25Â≠óËäÇ: ");
 					for (ii=24; ii>=0; ii--)
 					{
 						//_TRACE("%02X ", (unsigned char)pFileObj->demuxBuf.pbuf[pFileObj->demuxBuf.bufpos-ii]);
@@ -781,8 +781,8 @@ int		PSDemux_demux2(PSDEMUX_HANDLE handle, char *pbuf, int bufsize, int *mediaty
 
 				if (pFileObj->demuxBuf.bufpos < pes_length)	break;
 
-				i += (pes_length+4+2);	//4◊÷Ω⁄header, 2◊÷Ω⁄pes length
-				i -= 1;	//¥À¥¶-1, “ÚŒ™for—≠ª∑∫Û√Êª·+1
+				i += (pes_length+4+2);	//4Â≠óËäÇheader, 2Â≠óËäÇpes length
+				i -= 1;	//Ê≠§Â§Ñ-1, Âõ†‰∏∫forÂæ™ÁéØÂêéÈù¢‰ºö+1
 			}
 			else// if (pes_length+i > (pFileObj->demuxBuf.bufpos-i))
 			{
@@ -828,7 +828,7 @@ int		PSDemux_demux2(PSDEMUX_HANDLE handle, char *pbuf, int bufsize, int *mediaty
 				//if ( (unsigned char)pFileObj->demuxBuf.pbuf[i+4] < 0xFF && pFileObj->frame.bufpos>128)
 				if ( pes_length < 1024 && pFileObj->frame.bufpos>128)
 				{
-					////_TRACE("“ª÷°Ω· ¯.\n");
+					////_TRACE("‰∏ÄÂ∏ßÁªìÊùü.\n");
 					int remain_bytes = 0;
 
 					if (NULL != mediatype)	*mediatype = MEDIA_TYPE_AUDIO;
@@ -844,7 +844,7 @@ int		PSDemux_demux2(PSDEMUX_HANDLE handle, char *pbuf, int bufsize, int *mediaty
 					{
 						//_TRACE("%02X ", (unsigned char)pFileObj->frame.pbuf[ii]);
 					}
-					//_TRACE("\t\t∫Û25◊÷Ω⁄: ");
+					//_TRACE("\t\tÂêé25Â≠óËäÇ: ");
 					for (ii=24; ii>=0; ii--)
 					{
 						//_TRACE("%02X ", (unsigned char)pFileObj->frame.pbuf[pFileObj->frame.bufpos-ii]);
@@ -856,12 +856,12 @@ int		PSDemux_demux2(PSDEMUX_HANDLE handle, char *pbuf, int bufsize, int *mediaty
 					pFileObj->demuxBuf.bufpos = remain_bytes;//(pes_length-3-ext_size);
 					memset(pFileObj->demuxBuf.pbuf+pFileObj->demuxBuf.bufpos, 0x00, pFileObj->demuxBuf.bufsize-pFileObj->demuxBuf.bufpos);
 #if 0			
-					//_TRACE("¥¶¿Ì∫Û ˝æ›[%d]: ", pFileObj->demuxBuf.bufpos);
+					//_TRACE("Â§ÑÁêÜÂêéÊï∞ÊçÆ[%d]: ", pFileObj->demuxBuf.bufpos);
 					for (ii=0; ii<25; ii++)
 					{
 						//_TRACE("%02X ", (unsigned char)pFileObj->demuxBuf.pbuf[ii]);
 					}
-					//_TRACE("\t\t∫Û25◊÷Ω⁄: ");
+					//_TRACE("\t\tÂêé25Â≠óËäÇ: ");
 					for (ii=24; ii>=0; ii--)
 					{
 						//_TRACE("%02X ", (unsigned char)pFileObj->demuxBuf.pbuf[pFileObj->demuxBuf.bufpos-ii]);
@@ -872,8 +872,8 @@ int		PSDemux_demux2(PSDEMUX_HANDLE handle, char *pbuf, int bufsize, int *mediaty
 
 				if (pFileObj->demuxBuf.bufpos < pes_length)	break;
 
-				i += (pes_length+4+2);	//4◊÷Ω⁄header, 2◊÷Ω⁄pes length
-				i -= 1;	//¥À¥¶-1, “ÚŒ™for—≠ª∑∫Û√Êª·+1
+				i += (pes_length+4+2);	//4Â≠óËäÇheader, 2Â≠óËäÇpes length
+				i -= 1;	//Ê≠§Â§Ñ-1, Âõ†‰∏∫forÂæ™ÁéØÂêéÈù¢‰ºö+1
 			}
 			else
 			{
@@ -903,7 +903,7 @@ int		PSDemux_demux2(PSDEMUX_HANDLE handle, char *pbuf, int bufsize, int *mediaty
 
 				if ( (unsigned char)pFileObj->demuxBuf.pbuf[i+4] < 0xFF)
 				{
-					////_TRACE("“ª÷°Ω· ¯.\n");
+					////_TRACE("‰∏ÄÂ∏ßÁªìÊùü.\n");
 
 					if (NULL != mediatype)	*mediatype = MEDIA_TYPE_VIDEO;
 					if (NULL != framesize)	*framesize = pFileObj->frame.bufpos;
@@ -939,7 +939,7 @@ int		PSDemux_demux2(PSDEMUX_HANDLE handle, char *pbuf, int bufsize, int *mediaty
 
 
 
-int		PSDemux_demuxPacket(PSDEMUX_HANDLE handle, char *pbuf, int bufsize, int *mediatype, int *framesize, char **framedata)		//Ω‚Œˆ∫£øµPS¡˜∞¸
+int		PSDemux_demuxPacket(PSDEMUX_HANDLE handle, char *pbuf, int bufsize, int *mediatype, int *framesize, char **framedata)		//Ëß£ÊûêÊµ∑Â∫∑PSÊµÅÂåÖ
 {
 	if (bufsize < 4)
 	{
@@ -966,7 +966,7 @@ int		PSDemux_demuxPacket(PSDEMUX_HANDLE handle, char *pbuf, int bufsize, int *me
 }
 
 
-int		PSDemux_demuxInternalPacket(PSDEMUX_HANDLE handle, char *pbuf, int bufsize, int *out_mediatype, int *out_framesize, char **out_framedata)		//Ω‚Œˆ∫£øµPS¡˜∞¸
+int		PSDemux_demuxInternalPacket(PSDEMUX_HANDLE handle, char *pbuf, int bufsize, int *out_mediatype, int *out_framesize, char **out_framedata)		//Ëß£ÊûêÊµ∑Â∫∑PSÊµÅÂåÖ
 {
 	PS_FILE_OBJ_T *pFileObj = (PS_FILE_OBJ_T *)handle;
 	int i=0;
@@ -997,7 +997,7 @@ int		PSDemux_demuxInternalPacket(PSDEMUX_HANDLE handle, char *pbuf, int bufsize,
 			////_TRACE(TRACE_LOG_DEBUG, "Map Header 0x000001%02X\n", (unsigned char)pbuf[i+3]);
 
 			int pes_length = (((unsigned char)pbuf[i+4]) << 8) | ((unsigned char)pbuf[i+5]);
-			i += (pes_length+4+2);	//4◊÷Ω⁄header, 2◊÷Ω⁄pes length
+			i += (pes_length+4+2);	//4Â≠óËäÇheader, 2Â≠óËäÇpes length
 
 			if (bufsize - i < 0)
 			{
@@ -1006,7 +1006,7 @@ int		PSDemux_demuxInternalPacket(PSDEMUX_HANDLE handle, char *pbuf, int bufsize,
 			}
 			bufsize -= i;
 
-			i -= 1;	//¥À¥¶-1, “ÚŒ™for—≠ª∑∫Û√Êª·+1
+			i -= 1;	//Ê≠§Â§Ñ-1, Âõ†‰∏∫forÂæ™ÁéØÂêéÈù¢‰ºö+1
 		}
 		else if (  ((unsigned char)pbuf[i]==0x00) && ( (unsigned char)pbuf[i+1]==0x00) &&
 				((unsigned char)pbuf[i+2]==0x01) && ( (unsigned char)pbuf[i+3]==0xBD))
@@ -1014,7 +1014,7 @@ int		PSDemux_demuxInternalPacket(PSDEMUX_HANDLE handle, char *pbuf, int bufsize,
 			////_TRACE(TRACE_LOG_DEBUG, "Header 0x000001%02X\n", (unsigned char)pbuf[i+3]);
 
 			int pes_length = (((unsigned char)pbuf[i+4]) << 8) | ((unsigned char)pbuf[i+5]);
-			i += (pes_length+4+2);	//4◊÷Ω⁄header, 2◊÷Ω⁄pes length
+			i += (pes_length+4+2);	//4Â≠óËäÇheader, 2Â≠óËäÇpes length
 
 			if (bufsize - i < 0)
 			{
@@ -1023,7 +1023,7 @@ int		PSDemux_demuxInternalPacket(PSDEMUX_HANDLE handle, char *pbuf, int bufsize,
 			}
 			bufsize -= i;
 			
-			i -= 1;	//¥À¥¶-1, “ÚŒ™for—≠ª∑∫Û√Êª·+1
+			i -= 1;	//Ê≠§Â§Ñ-1, Âõ†‰∏∫forÂæ™ÁéØÂêéÈù¢‰ºö+1
 		}
 		else if (  ((unsigned char)pbuf[i]==0x00) && ( (unsigned char)pbuf[i+1]==0x00) && ((unsigned char)pbuf[i+2]==0x01) && 
 				(( ((unsigned char)pbuf[i+3]>=0xE0) && ((unsigned char)pbuf[i+3]<=0xEF) ) ||		//VIDEO
@@ -1052,7 +1052,7 @@ int		PSDemux_demuxInternalPacket(PSDEMUX_HANDLE handle, char *pbuf, int bufsize,
 
 			if (pes_length < 1)
 			{
-				//_TRACE(TRACE_LOG_DEBUG, " ˝æ›≥§∂»–°”⁄1: %d\n", pes_length);
+				//_TRACE(TRACE_LOG_DEBUG, "Êï∞ÊçÆÈïøÂ∫¶Â∞è‰∫é1: %d\n", pes_length);
 /*
 				FILE *ff = fopen("pes_err.txt", "wb");
 				if (NULL != ff)
@@ -1095,13 +1095,13 @@ int		PSDemux_demuxInternalPacket(PSDEMUX_HANDLE handle, char *pbuf, int bufsize,
 #endif
 
 /*
-    µ⁄0~3Œª £∫ 0010  ƒ¨»œπÊ∂®’º”√ÀƒŒª
-    µ⁄4~6Œª£∫ 000     ’º”√3Œª  PTS[32~30]
-    µ⁄7     Œª£∫ 1          ’º”√1Œª  marker_bit
-    µ⁄8~22Œª£∫0000 0000 0000 000 ’º”√15Œª PTS[29..15]
-    µ⁄23Œª    £∫1         ’º”√1Œªmarker_bit
-    µ⁄24~38Œª£∫1001 0110 0000 011 ’º”√15Œª PTS[14..0]
-    µ⁄39Œª    £∫1         ’º”√1Œªmarker_bit
+    Á¨¨0~3‰Ωç Ôºö 0010  ÈªòËÆ§ËßÑÂÆöÂç†Áî®Âõõ‰Ωç
+    Á¨¨4~6‰ΩçÔºö 000     Âç†Áî®3‰Ωç  PTS[32~30]
+    Á¨¨7     ‰ΩçÔºö 1          Âç†Áî®1‰Ωç  marker_bit
+    Á¨¨8~22‰ΩçÔºö0000 0000 0000 000 Âç†Áî®15‰Ωç PTS[29..15]
+    Á¨¨23‰Ωç    Ôºö1         Âç†Áî®1‰Ωçmarker_bit
+    Á¨¨24~38‰ΩçÔºö1001 0110 0000 011 Âç†Áî®15‰Ωç PTS[14..0]
+    Á¨¨39‰Ωç    Ôºö1         Âç†Áî®1‰Ωçmarker_bit
 */
 			}
 			else if (pts_dts_flag == 0x03)		//has PTS and DTS
@@ -1112,14 +1112,31 @@ int		PSDemux_demuxInternalPacket(PSDEMUX_HANDLE handle, char *pbuf, int bufsize,
 			////_TRACE(TRACE_LOG_DEBUG, "pts_dts_flag: %d\text_size: %d   pts: 0x%08X [%u]%u\n", pts_dts_flag, ext_size, pts, pts, pts/90000);
 			////_TRACE(TRACE_LOG_DEBUG, "PES Header 0x000001%X  length:  0x%02X%02X\t\t%d\n", (unsigned char)pbuf[i+3], (unsigned char)pbuf[i+4], (unsigned char)pbuf[i+5], pes_length);
 
+			// ‰∏∫8KËßÜÈ¢ë‰ºòÂåñÂ∏ßËæπÁïåÂà§Êñ≠Êú∫Âà∂ÔºåÂ¢ûÂä†ÁºìÂÜ≤Âå∫‰ΩøÁî®ÁéáÊ£ÄÊü•
+			// ÂΩìÁºìÂÜ≤Âå∫‰ΩøÁî®ÁéáË∂ÖËøá80%Êó∂ÊèêÂâçËß¶ÂèëÂ∏ßÂ§ÑÁêÜ
+			if (pFileObj->frame.bufpos > (pFileObj->frame.bufsize * 0.8)) {
+				if (pFileObj->frame.bufpos > 0)
+				{
+					//ËøîÂõûÂΩìÂâçÂ∏ßÊï∞ÊçÆ
+					if (NULL != out_mediatype)	*out_mediatype = pFileObj->mediaType;
+					if (NULL != out_framesize)	*out_framesize = pFileObj->frame.bufpos;
+					if (NULL != out_framedata)	*out_framedata = pFileObj->frame.pbuf;
+					getFrameResult = 0x01;
+					pFileObj->clear = 0x01;
+					
+					// ÈáçÁΩÆÁºìÂÜ≤Âå∫Âπ∂ÁªßÁª≠Â§ÑÁêÜÂΩìÂâçÊï∞ÊçÆÂåÖ
+					BUFF_CLEAR(&pFileObj->frame);
+				}
+			}
+
 			if (pes_length+6+i <= (bufsize-i))
 			//if (pes_length+6 <= (bufsize-i))
 			{
-				if (pFileObj->pts != pts)// && pts>0U)	//œ¬“ª÷°
+				if (pFileObj->pts != pts)// && pts>0U)	//‰∏ã‰∏ÄÂ∏ß
 				{
 					if (pFileObj->frame.bufpos > 0)
 					{
-						//∑µªÿ…œ“ª÷° ˝æ›
+						//ËøîÂõû‰∏ä‰∏ÄÂ∏ßÊï∞ÊçÆ
 
 						if (NULL != out_mediatype)	*out_mediatype = pFileObj->mediaType;
 						if (NULL != out_framesize)	*out_framesize = pFileObj->frame.bufpos;
@@ -1130,9 +1147,26 @@ int		PSDemux_demuxInternalPacket(PSDEMUX_HANDLE handle, char *pbuf, int bufsize,
 
 					BUFF_CLEAR(&pFileObj->demuxBuf);
 					BUFF_ENQUEUE(&pFileObj->demuxBuf, pbuf, bufsize);
-					pFileObj->mediaType = mediaType;	//∏¸–¬µ±«∞√ΩÃÂ¿‡–Õ
+					pFileObj->mediaType = mediaType;	//Êõ¥Êñ∞ÂΩìÂâçÂ™í‰ΩìÁ±ªÂûã
 					pFileObj->pts = pts;
 					break;
+				}
+				else if (pFileObj->pts == pts && pFileObj->frame.bufpos > 100000 && pFileObj->frame.bufpos > 0)
+				{
+					// ÂΩìPTSÁõ∏Âêå‰∏îÊï∞ÊçÆÁßØÁ¥ØË∂ÖËøá100000Â≠óËäÇÊó∂Ëß¶ÂèëÂ∏ßÂ§ÑÁêÜ
+					if (pFileObj->frame.bufpos > 0)
+					{
+						//ËøîÂõûÂΩìÂâçÂ∏ßÊï∞ÊçÆ
+						if (NULL != out_mediatype)	*out_mediatype = pFileObj->mediaType;
+						if (NULL != out_framesize)	*out_framesize = pFileObj->frame.bufpos;
+						if (NULL != out_framedata)	*out_framedata = pFileObj->frame.pbuf;
+						getFrameResult = 0x01;
+						pFileObj->clear = 0x01;
+						pFileObj->mediaType = mediaType;	//Êõ¥Êñ∞ÂΩìÂâçÂ™í‰ΩìÁ±ªÂûã
+						pFileObj->pts = pts;
+						BUFF_CLEAR(&pFileObj->demuxBuf);
+						break;
+					}
 				}
 				else
 				{
@@ -1154,7 +1188,7 @@ int		PSDemux_demuxInternalPacket(PSDEMUX_HANDLE handle, char *pbuf, int bufsize,
 							if (NULL != out_framedata)	*out_framedata = pFileObj->frame.pbuf;
 							getFrameResult = 0x01;
 							pFileObj->clear = 0x01;
-							pFileObj->mediaType = mediaType;	//∏¸–¬µ±«∞√ΩÃÂ¿‡–Õ
+							pFileObj->mediaType = mediaType;	//Êõ¥Êñ∞ÂΩìÂâçÂ™í‰ΩìÁ±ªÂûã
 							pFileObj->pts = pts;
 							BUFF_CLEAR(&pFileObj->demuxBuf);
 							break;
@@ -1164,8 +1198,8 @@ int		PSDemux_demuxInternalPacket(PSDEMUX_HANDLE handle, char *pbuf, int bufsize,
 				}
 				if (bufsize < pes_length && getFrameResult==0x00)	break;
 
-				i += (pes_length+4+2);	//4◊÷Ω⁄header, 2◊÷Ω⁄pes length
-				i -= 1;	//¥À¥¶-1, “ÚŒ™for—≠ª∑∫Û√Êª·+1
+				i += (pes_length+4+2);	//4Â≠óËäÇheader, 2Â≠óËäÇpes length
+				i -= 1;	//Ê≠§Â§Ñ-1, Âõ†‰∏∫forÂæ™ÁéØÂêéÈù¢‰ºö+1
 			}
 			else// if (pes_length+i > (bufsize-i))
 			{

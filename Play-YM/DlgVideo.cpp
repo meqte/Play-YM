@@ -7,7 +7,7 @@
 //#include "gui_common.h"
 
 
-// CDlgVideo �Ի���
+// CDlgVideo 对话框
 int CALLBACK __LivePlayerCallBack(EASY_CALLBACK_TYPE_ENUM callbackType, int channelId, void* userPtr, int mediaType, char* pbuf, LIVE_FRAME_INFO* frameInfo);
 IMPLEMENT_DYNAMIC(CDlgVideo, CDialogEx)
 
@@ -58,7 +58,7 @@ BEGIN_MESSAGE_MAP(CDlgVideo, CDialogEx)
 END_MESSAGE_MAP()
 
 
-// CDlgVideo ��Ϣ��������
+// CDlgVideo 消息处理程序
 LRESULT CDlgVideo::WindowProc(UINT message, WPARAM wParam, LPARAM lParam)
 {
 	if (WM_PAINT == message || WM_SIZE == message)
@@ -80,7 +80,7 @@ BOOL CDlgVideo::OnInitDialog()
 	SetBackgroundColor(RGB(0x7c, 0x7c, 0x7c));
 
 	return TRUE;  // return TRUE unless you set the focus to a control
-	// �쳣: OCX ����ҳӦ���� FALSE
+	// 异常: OCX 属性页应返回 FALSE
 }
 
 
@@ -95,7 +95,7 @@ BOOL CDlgVideo::DestroyWindow()
 
 void CDlgVideo::OnLButtonDblClk(UINT nFlags, CPoint point)
 {
-	// TODO: �ڴ�������Ϣ������������/�����Ĭ��ֵ
+	// TODO: 在此添加消息处理程序代码和/或调用默认值
 
 
 	HWND hWnd = ::GetParent(GetSafeHwnd());
@@ -373,8 +373,9 @@ void CDlgVideo::OnBnClickedButtonPreview()
 		else if (0 == strncmp(szURL, "http", 4))	sourceType = LIVE_CHANNEL_SOURCE_TYPE_HLS;
 		else if (0 == strncmp(szURL, "file", 4))	sourceType = LIVE_CHANNEL_SOURCE_TYPE_FILE;
 
-		int queueSize = 1024 * 1024 * 2;		//2MB
-		if (sourceType == LIVE_CHANNEL_SOURCE_TYPE_HLS)		queueSize = 1024 * 1024 * 5;		//5MB
+		// 为8K视频增加队列缓冲区大小到16MB
+		int queueSize = 1024 * 1024 * 16;		//16MB
+		if (sourceType == LIVE_CHANNEL_SOURCE_TYPE_HLS)		queueSize = 1024 * 1024 * 16;		//16MB
 
 #ifdef _DEBUG1
 		static int iiDebug = 0;
@@ -401,8 +402,8 @@ void CDlgVideo::OnBnClickedButtonPreview()
 			libEasyPlayer_SetDecodeType(playerHandle, m_ChannelId, onlyDecodeKeyFrame);
 
 			int iPos = pSliderCache->GetPos();
-			libEasyPlayer_SetPlayFrameCache(playerHandle, m_ChannelId, iPos);		//���û���
-			//libEasyPlayer_StartPlaySound(playerHandle, m_ChannelId);				//��������
+			libEasyPlayer_SetPlayFrameCache(playerHandle, m_ChannelId, iPos);		//设置缓存
+			//libEasyPlayer_StartPlaySound(playerHandle, m_ChannelId);				//播放声音
 			if (NULL != pDlgRender)	pDlgRender->SetChannelId(m_ChannelId);
 
 			libEasyPlayer_SetScaleDisplay(playerHandle, m_ChannelId, shownToScale, RGB(0x26, 0x26, 0x26));
@@ -498,7 +499,7 @@ int CALLBACK __LivePlayerCallBack(EASY_CALLBACK_TYPE_ENUM callbackType, int chan
 	else if (callbackType == EASY_TYPE_FILE_DURATION)
 	{
 		wchar_t wszLog[128] = { 0 };
-		wsprintf(wszLog, TEXT("��ʱ��: %u\n"), frameInfo->timestamp_sec);
+		wsprintf(wszLog, TEXT("总时长: %u\n"), frameInfo->timestamp_sec);
 		OutputDebugString(wszLog);
 	}
 	else if (callbackType == EASY_TYPE_CODEC_DATA)
@@ -513,7 +514,7 @@ int CALLBACK __LivePlayerCallBack(EASY_CALLBACK_TYPE_ENUM callbackType, int chan
 		else if (mediaType == MEDIA_TYPE_VIDEO)
 		{
 			wchar_t wszLog[128] = { 0 };
-			wsprintf(wszLog, TEXT("����ʱ��: %u\n"), frameInfo->timestamp_sec);
+			wsprintf(wszLog, TEXT("播放时间: %u\n"), frameInfo->timestamp_sec);
 			//OutputDebugString(wszLog);
 
 			pLiveVideo->onVideoData(channelId, mediaType, pbuf, frameInfo);
@@ -542,26 +543,26 @@ int CALLBACK __LivePlayerCallBack(EASY_CALLBACK_TYPE_ENUM callbackType, int chan
 	}
 	else if (callbackType == EASY_TYPE_DECODE_DATA)
 	{
-		//_TRACE(TRACE_LOG_DEBUG, "��������[ch%d]type[%d] channelId[%d] mediaType[%d] [%d x %d] framesize[%d]\n",  pLiveVideo->channelId,
+		//_TRACE(TRACE_LOG_DEBUG, "解码数据[ch%d]type[%d] channelId[%d] mediaType[%d] [%d x %d] framesize[%d]\n",  pLiveVideo->channelId,
 			//	callbackType, channelId, mediaType, frameInfo->width, frameInfo->height, frameInfo->length);
 	}
 	else if (callbackType == EASY_TYPE_SNAPSHOT)
 	{
-		//_TRACE(TRACE_LOG_DEBUG, "ץ��ͼƬ[ch%d] %s. filename:%s\n",  channelId, mediaType==1?"�ɹ�":"ʧ��", pbuf);
-		if (mediaType == MEDIA_TYPE_VIDEO)		OutputDebugString(TEXT("ץ��ͼƬ�ɹ�\n"));
-		else if (mediaType == MEDIA_TYPE_EVENT)		OutputDebugString(TEXT("ץ��ͼƬʧ��\n"));
+		//_TRACE(TRACE_LOG_DEBUG, "抓拍图片[ch%d] %s. filename:%s\n",  channelId, mediaType==1?"成功":"失败", pbuf);
+		if (mediaType == MEDIA_TYPE_VIDEO)		OutputDebugString(TEXT("抓拍图片成功\n"));
+		else if (mediaType == MEDIA_TYPE_EVENT)		OutputDebugString(TEXT("抓拍图片失败\n"));
 	}
 	else if (callbackType == EASY_TYPE_RECORDING)
 	{
-		if (mediaType == MEDIA_TYPE_VIDEO)		OutputDebugString(TEXT("¼��ɹ�\n"));
-		else if (mediaType == MEDIA_TYPE_EVENT)		OutputDebugString(TEXT("¼��ʧ��\n"));
+		if (mediaType == MEDIA_TYPE_VIDEO)		OutputDebugString(TEXT("录像成功\n"));
+		else if (mediaType == MEDIA_TYPE_EVENT)		OutputDebugString(TEXT("录像失败\n"));
 
 		pLiveVideo->PostMessageW(WM_RECORDING_CMPLETE, MEDIA_TYPE_VIDEO == mediaType ? 0 : -1, 0);
 	}
 	else if (callbackType == EASY_TYPE_INSTANT_REPLAY_RECORDING)
 	{
-		if (mediaType == MEDIA_TYPE_VIDEO)		OutputDebugString(TEXT("��ʱ�ط�¼��ɹ�\n"));
-		else if (mediaType == MEDIA_TYPE_EVENT)		OutputDebugString(TEXT("��ʱ�ط�¼��ʧ��\n"));
+		if (mediaType == MEDIA_TYPE_VIDEO)		OutputDebugString(TEXT("即时回放录像成功\n"));
+		else if (mediaType == MEDIA_TYPE_EVENT)		OutputDebugString(TEXT("即时回放录像失败\n"));
 	}
 	else if (callbackType == EASY_TYPE_PLAYBACK_TIME)		//
 	{
@@ -573,7 +574,7 @@ int CALLBACK __LivePlayerCallBack(EASY_CALLBACK_TYPE_ENUM callbackType, int chan
 
 		wchar_t wszLog[128] = { 0 };
 		char szLog[128] = { 0 };
-		sprintf(szLog, "[ch%d]��ǰ�ط�ʱ��: %s\n", channelId, szTime);
+		sprintf(szLog, "[ch%d]当前回放时间: %s\n", channelId, szTime);
 
 		MByteToWChar(szLog, wszLog, sizeof(wszLog) / sizeof(wszLog[0]));
 		OutputDebugString(wszLog);
@@ -648,7 +649,8 @@ void CALLBACK __HIKNVR_CallBack(LONG lPlayHandle, DWORD dwDataType, BYTE* pBuffe
 
 	if (NULL == pNvrChannel->psDemuxHandle)
 	{
-		PSDemux_Init(&pNvrChannel->psDemuxHandle, 1024 * 1024, 1024 * 1024);
+		// 为8K视频增加缓冲区大小到16MB
+		PSDemux_Init(&pNvrChannel->psDemuxHandle, 1024 * 1024 * 16, 1024 * 1024 * 16);
 	}
 	if (NULL != pNvrChannel->psDemuxHandle)
 	{
@@ -800,13 +802,13 @@ void	CDlgVideo::OpenHikNvrRealStream()
 	HWND hWnd = NULL;
 	if (NULL != pDlgRender)	hWnd = pDlgRender->GetSafeHwnd();
 
-	hikNvrChannel.channelId = libEasyPlayer_OpenStream(playerHandle, LIVE_CHANNEL_TYPE_ENCODE_DATA, "", 0, "", "", NULL, NULL, 0, 0, 1024 * 1024 * 2, 0);
+	// 为8K视频增加队列缓冲区大小到16MB
+	hikNvrChannel.channelId = libEasyPlayer_OpenStream(playerHandle, LIVE_CHANNEL_TYPE_ENCODE_DATA, "", 0, "", "", NULL, NULL, 0, 0, 1024 * 1024 * 16, 0);
 	if (hikNvrChannel.channelId > 0)
 	{
 		libEasyPlayer_StartPlayStream(playerHandle, hikNvrChannel.channelId, hWnd, RenderFormat, 0);
 		libEasyPlayer_SetPlayFrameCache(playerHandle, hikNvrChannel.channelId, 3);
 	}
-
 
 	hikNvrChannel.playHandle = libHIKNVR_StartRealStream(hikNvrHandle, iChannelID, 0, __HIKNVR_CallBack, &hikNvrChannel);
 #endif
@@ -870,15 +872,15 @@ HBRUSH CDlgVideo::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 {
 	HBRUSH hbr = CDialogEx::OnCtlColor(pDC, pWnd, nCtlColor);
 
-	// TODO:  �ڴ˸��� DC ���κ�����
+	// TODO:  在此更改 DC 的任何特性
 	switch (nCtlColor)
 	{
-	case CTLCOLOR_BTN:	//��ť
+	case CTLCOLOR_BTN:	//按钮
 	{
 		return m_BrushBtn;
 	}
 	break;
-	case CTLCOLOR_EDIT:	//�༭��
+	case CTLCOLOR_EDIT:	//编辑框
 	{
 		//pDC->SelectObject(&fontText);
 		pDC->SetTextColor(DIALOG_BASE_TEXT_COLOR);
@@ -897,6 +899,6 @@ HBRUSH CDlgVideo::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 	}
 
 
-	// TODO:  ���Ĭ�ϵĲ������軭�ʣ��򷵻���һ������
+	// TODO:  如果默认的不是所需画笔，则返回另一个画笔
 	return hbr;
 }

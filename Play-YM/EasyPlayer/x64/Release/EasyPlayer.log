@@ -1,14 +1,6 @@
-﻿  EasyPlayer.cpp
-  EasyPlayerDlg.cpp
-D:\github\Play-YM\EasyPlayerDlg.cpp(198,13): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  (编译源文件“/EasyPlayerDlg.cpp”)
-  
-D:\github\Play-YM\EasyPlayerDlg.cpp(204,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  (编译源文件“/EasyPlayerDlg.cpp”)
-  
-  正在生成代码
-  6 of 549 functions ( 1.1%) were compiled, the rest were copied from previous compilation.
+﻿  正在生成代码
+  0 of 581 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    8 functions had inline decision re-evaluated but remain unchanged
+    0 functions had inline decision re-evaluated but remain unchanged
   已完成代码的生成
-  EasyPlayer.vcxproj -> D:\github\Play-YM\x64\Release\EasyPlayer.exe
+  EasyPlayer.vcxproj -> E:\Github\Play-YM\x64\Release\EasyPlayer.exe

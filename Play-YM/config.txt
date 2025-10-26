@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <XMLConfig>
-    <SplitWindow>24</SplitWindow>
+    <SplitWindow>4</SplitWindow>
     <Scale>0</Scale>
     <Multiple>1</Multiple>
     <FullScreen>0</FullScreen>
